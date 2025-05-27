@@ -1,14 +1,15 @@
 pipeline {
     agent {
         docker {
-            image 'gradle:8.7-jdk21-alpine'  // 包含 Gradle + JDK 21
+            image 'gradle:8.7-jdk21-jammy'
+            args '--user root -v $HOME/.gradle:/home/gradle/.gradle'
         }
     }
     stages {
         stage('Build') {
             steps {
-                sh 'gradle --version'        // 验证 Gradle
-                sh 'gradle build'           // 执行构建
+                sh 'gradle --version'
+                sh 'gradle build'
             }
         }
     }
