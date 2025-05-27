@@ -1,9 +1,14 @@
 pipeline {
-    agent { docker { image 'maven:3.9.9-eclipse-temurin-21-alpine' } }
+    agent {
+        docker {
+            image 'gradle:8.7-jdk21-alpine'  // 包含 Gradle + JDK 21
+        }
+    }
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                sh 'mvn --version'
+                sh 'gradle --version'        // 验证 Gradle
+                sh 'gradle build'           // 执行构建
             }
         }
     }
